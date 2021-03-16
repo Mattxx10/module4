@@ -10,33 +10,38 @@ document.getElementById("submit").addEventListener('click',function (){
     var median;
     var range;
     var sum = value[0] + value[1] + value[2];
-    for(var i = 0; i < 3; i += 1){
-        console.log(value[i]);
-        if(value[i] > maximum){
-            maximum = value[i];
+    if((Number.isFinite(value[0])) && (Number.isFinite(value[1])) && (Number.isFinite(value[2]))){
+        document.getElementById("warning-message").style.display = "none";
+        for(var i = 0; i < 3; i += 1){
+            console.log(value[i]);
+            if(value[i] > maximum){
+                maximum = value[i];
+            }
         }
+            for(var x = 0; x < 3; x += 1){
+                console.log("working");
+                if(value[x] < minimum){
+                    minimum = value[x];
+                }
+            }
+            for(var z = 0; z < 3; z += 1){
+                if(value[z] !== maximum && value[z] !== minimum){
+                    median = value[z];
+                }
+            }
+            console.log(sum);
+            mean = (sum / 3).toFixed(2);
+            range = maximum - minimum;
+            console.log(maximum);
+            console.log(minimum);
+            console.log(range);
+            document.getElementById("max").innerHTML = "Max : " + maximum;
+            document.getElementById("min").innerHTML = "Min : " + minimum;
+            document.getElementById("mean").innerHTML = "Mean : " + mean;
+            document.getElementById("range").innerHTML = "Range : " + range;
+            document.getElementById("med").innerHTML = "Median : " + median;
     }
-        for(var x = 0; x < 3; x += 1){
-            console.log("working");
-            if(value[x] < minimum){
-                minimum = value[x];
-            }
-        }
-        for(var z = 0; z < 3; z += 1){
-            if(value[z] !== maximum && value[z] !== minimum){
-                median = value[z];
-            }
-        }
-        console.log(sum);
-        mean = (sum / 3).toFixed(2);
-        range = maximum - minimum;
-        console.log(maximum);
-        console.log(minimum);
-        console.log(range);
-        document.getElementById("max").innerHTML = maximum;
-        document.getElementById("min").innerHTML = minimum;
-        document.getElementById("mean").innerHTML = mean;
-        document.getElementById("range").innerHTML = range;
-        document.getElementById("med").innerHTML = median;
-    
+    else{
+        document.getElementById("warning-message").style.display = "block";
+    }
 });
